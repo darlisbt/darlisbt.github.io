@@ -36,7 +36,7 @@ footer{margin-top:3rem;text-align:center;color:#a3a3a3;font-size:0.9rem}
 <hr/>
 <h2 id="year-2025" style="margin-top:2em;border-bottom:1px solid #ddd;padding-bottom:0.3em;">2025</h2>
 <ul class="year-list"><li class='pubItem'>Dehman, B., Ervedoza, S., & Zuazua, E. (2025). <i><a href="https://arxiv.org/abs/2504.18976" target="_blank">Regional and Partial Observability and Control of Waves</a></i>.  Special issue on the memory of H. Brezis. C. R. Acad. Sci. Paris. arXiv: <a href="https://arxiv.org/abs/2504.18976" target="_blank">2504.18976</a> , <a href="https://cris.fau.de/publications/340593559/" target="_blank">FAU CRIS</a></li>
-<li class='pubItem'>Fernandes Barreira, J., Sônego, M., & Zuazua Iriondo, E. (2025). <i><a href="https://cris.fau.de/converis/publicweb/Publication/352772701" target="_blank">Boundary and Interior Control in a Diffusive Lotka-Volterra Model</a></i>.  (Unpublished, Submitted). , <a href="https://cris.fau.de/converis/publicweb/Publication/352772701" target="_blank">FAU CRIS</a></li>
+<li class='pubItem'>Fernandes Barreira, J., Sonego, M., & Zuazua, E. (2025). <i><a href="https://cris.fau.de/converis/publicweb/Publication/352772701" target="_blank">Boundary and Interior Control in a Diffusive Lotka-Volterra Model</a></i>.  (Unpublished, Submitted). , <a href="https://cris.fau.de/converis/publicweb/Publication/352772701" target="_blank">FAU CRIS</a></li>
 <li class='pubItem'>Acero, A., Jimenez-Rodriguez, D. M., Pighin, D., Zuazua, E., Del Rio, J., & Uribe-Etxebarria, X. (2025). <i><a href="https://arxiv.org/abs/2510.17901" target="_blank">The Sherpa.ai Blind Vertical Federated Learning Paradigm to Minimize the Number of Communications</a></i>.  arXiv preprint. arXiv: <a href="https://arxiv.org/abs/2510.17901" target="_blank">2510.17901</a> , <a href="https://cris.fau.de/publications/352499037/" target="_blank">FAU CRIS</a></li>
 <li class='pubItem'>Ignat, L. & Zuazua, E. (2025). <i><a href="https://doi.org/10.3934/dcds.2025165" target="_blank">Sharp Numerical Approximation of the Hardy Constant</a></i>.  Discrete and Continuous Dynamical Systems. <a href="https://doi.org/10.3934/dcds.2025165" target="_blank">https://doi.org/10.3934/dcds.2025165</a></li>
 <li class='pubItem'>Li, Z., Liu, K., Song, Y., Yue, H., & Zuazua, E. (2025). <i><a href="https://www.google.com/search?q=Li%2C+Z.%2C+Liu%2C+K.%2C+Song%2C+Y.%2C+Yue%2C+H.%2C+%26+Zuazua%2C+E.+Deep+Neural+ODE+Operator+Networks+for+PDEs" target="_blank">Deep Neural ODE Operator Networks for PDEs</a></i>.  arXiv preprint.</li>
@@ -591,6 +591,18 @@ footer{margin-top:3rem;text-align:center;color:#a3a3a3;font-size:0.9rem}
     });
   });
 })();
+</script>
+<script>
+  // Auto-send the height to parent page (WordPress)
+  function sendHeight(){
+    const h = document.documentElement.scrollHeight;
+    parent.postMessage({type:"resize", height:h}, "*");
+  }
+
+  // Trigger on load and whenever the content changes
+  new ResizeObserver(sendHeight).observe(document.body);
+  window.addEventListener("load", sendHeight);
+  sendHeight();
 </script>
 </body>
 </html>

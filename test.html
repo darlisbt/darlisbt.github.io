@@ -593,25 +593,40 @@ footer{margin-top:3rem;text-align:center;color:#a3a3a3;font-size:0.9rem}
 })();
 </script>
 <script>
-  // Auto-send the height to parent webpage
-  function sendHeight(){
-    const h = document.documentElement.scrollHeight;
-    parent.postMessage({type:"resize", height:h}, "*");
-  }
+    // Auto-send the height to parent webpage
+    function sendHeight(){
+    if(window.stopAutoResize) return; // pause during manual scrolls
+    const height = document.documentElement.scrollHeight;
+    parent.postMessage({type:"resize", height: height}, "*");
+    }
 
-  // Trigger on load and whenever the content changes
-  new ResizeObserver(sendHeight).observe(document.body);
-  window.addEventListener("load", sendHeight);
-  sendHeight();
+    const resizeObserver = new ResizeObserver(sendHeight);
+    resizeObserver.observe(document.body);
+    window.addEventListener("load", sendHeight);
+    sendHeight();
 </script>
 <script>
   // Back to top after auto-send resizing
-  document.querySelectorAll('a[href="#top"]').forEach(link => {
-    link.addEventListener('click', (e) => {
+(function(){
+  const topLinks = document.querySelectorAll('a[href="#top"], .back-top');
+  for (const link of topLinks){
+    link.addEventListener('click', function(e){
       e.preventDefault();
+
+      // temporarily pause auto-resize to prevent jitter
+      window.stopAutoResize = true;
+
+      // smooth scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // re-enable resize after scroll animation ends
+      setTimeout(() => {
+        window.stopAutoResize = false;
+        sendHeight();
+      }, 900);
     });
-  });
+  }
+})();
 </script>
 </body>
 </html>

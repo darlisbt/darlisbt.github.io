@@ -620,11 +620,11 @@ footer{margin-top:3rem;text-align:center;color:#a3a3a3;font-size:0.9rem}
 })();
 </script>
 <script>
-    // Auto-send the height to parent webpage
+    // auto-resizing webpage / pubs lists
     function sendHeight(){
     if(window.stopAutoResize) return; // pause during manual scrolls
     const height = document.documentElement.scrollHeight;
-    parent.postMessage({type:"resize", height: height}, "*");
+    parent.postMessage({type:"resize", height: height}, "https://dcn.nat.fau.eu/zuazua-publications/");
     }
 
     const resizeObserver = new ResizeObserver(sendHeight);
